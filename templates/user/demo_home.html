@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+
+  <div class="container">
+  {% for item in BillBord_list%}
+  <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="row panel-body" style="background: white">
+          
+        <div class="col-sm-5" style="background: green; justify-content:right">
+         
+            <article class="media content-section" id ="media_content_section">  
+              <br/>
+                <img class="rounded mx-auto d-block" style="float: right;" src="{{ item.imglink.url }}" width="45%" height="20%" style="justify-content:right;">
+            </article> 
+        
+        </div>
+        <div class="col-sm-4" style=" justify-content:left;background: blue ;">
+        <h3>BillBorderId:{{ item.boardId }}</h3>   Facing Direction:{{ item.facingDirection}}<br/>
+        Height :{{ item.height }}<br/>
+        Width :{{ item.width }}<br/>
+        latitude :{{ item.latitude }}<br/>
+        longitude : {{item.longitude }}<br/>
+        City : {{ item.city }}<br/>
+        sqfeetSize : {{ item.sqfeetSize }}<br/>
+        backLight : {{ item.backLight }}<br/>
+        <!-- available : {{ item.available }}<br/> -->
+      </div>
+      <div class="col-sm-2" style="background: black ; justify-content:left">
+          <br/><br/>
+          {% if item.available == True %}
+            <button class="btn btn-success glyphicon glyphicon-ok">Available Now</button><br/><br/>
+          {% endif %}
+
+          <form type="submit" method="GET" action ="{% url 'user:edit_BillBoard' item.id %}">
+              {% csrf_token %}
+            <button type="submit" class="btn btn-primary glyphicon glyphicon-pencil">
+              Edit
+            </button>
+          </form><br/>
+        <form type="submit" method="POST" action ="{% url 'user:delete_BillBoard' item.id %}" onclick="return confirm('Do you really want to delete this BillBoard?');">
+            {% csrf_token %}                     
+            <button type="submit" class="btn btn-danger glyphicon glyphicon-remove">
+                Delete
+            </button>
+        </form>        
+      </div>
+
+      </div>
+   
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<br/>
+{% if is_paginated %}
+  <nav aria-label="Page navigation conatiner"></nav>
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+    {% endif %}
+  </ul>
+  </nav>
+</div>
+{% endif %}
+{% endblock content %} 
+

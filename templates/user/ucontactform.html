@@ -1,0 +1,27 @@
+<form action="{% url 'usercontact' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {% block content %}
+
+    <head><b>Drop a line</b></head>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="t1" required></td>
+        </tr>
+        <tr>
+            <td>Email address</td>
+            <td><input type="email" name="t2" required></td>
+        </tr>
+        <tr>
+            <td>Subject</td>
+            <td><input type="text" name="t3" required></td>
+        </tr>
+        <tr> 
+            <td>Message</td>
+            <td><input type="text" name="t4" required></td>
+        </tr>
+        <br>
+        <tr><br>
+            <td><input type="submit" value="SEND"></td>
+        </tr>
+        {% endblock %}
+    

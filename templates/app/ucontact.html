@@ -1,0 +1,24 @@
+<form action="{% url 'usercontact' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {% block content %}
+
+    <head><b>Contact Us..</b></head>
+    <table>
+        <tr>
+            <td>boardId</td>
+            <td><input type="text" name="t1" required></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="t2" required></td>
+        </tr>
+        <tr> 
+            <td>Contact Number</td>
+            <td><input type="number" name="t4" required></td>
+        </tr>
+        <br>
+        <tr><br>
+            <td><input type="submit" value="SEND"></td>
+        </tr>
+        {% endblock %}
+    
+

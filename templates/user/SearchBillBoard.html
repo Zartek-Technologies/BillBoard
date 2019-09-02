@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+  <div class="container">
+      {% if BillBord_list == False %}
+      <h2>BillBord With this id does not exist</h2>
+      {%else%}
+          
+  <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="row panel-body" style="background: white">
+        <div class="col-sm-5" style="background: white; justify-content:right">
+          <center>
+            <article class="media content-section" id ="media_content_section">  
+              <br/><br/><br/>  
+                <img class="rounded mx-auto d-block" src="{{ BillBord_list.imglink.url }}" width="45%" height="20%" style="justify-content:right;">
+            </article> 
+          </center>
+        </div>
+        <div class="col-sm-5" style="background: white ; justify-content:left">
+        <h3>BillBorderId:{{ BillBord_list.boardId }}</h3><br/>
+        Facing Direction:{{ BillBord_list.facingDirection}}<br/>
+        Height :{{ BillBord_list.height }}<br/>
+        Width :{{ BillBord_list.width }}<br/>
+        latitude :{{ BillBord_list.latitude }}<br/>
+        longitude : {{BillBord_list.longitude }}<br/>
+        City : {{ BillBord_list.city }}<br/>
+        sqfeetSize : {{ BillBord_list.sqfeetSize }}<br/>
+        backLight : {{ BillBord_list.backLight }}<br/>
+        <!-- available : {{ BillBord_list.available }}<br/> -->
+      </div>
+      <div class="col-sm-2" style="background: white ; justify-content:left">
+        <br/><br/>
+        {% if BillBord_list.available == True %}
+          <button class="btn btn-success glyphicon glyphicon-ok">Available Now</button><br/><br/>
+        {% endif %}
+
+        <form type="submit" method="GET" action ="{% url 'user:edit_BillBoard' BillBord_list.id %}">
+            {% csrf_token %}
+          <button type="submit" class="btn btn-primary glyphicon glyphicon-pencil">
+            Edit
+          </button>
+        </form><br/>
+      <form type="submit" method="POST" action ="{% url 'user:delete_BillBoard' BillBord_list.id %}" onclick="return confirm('Do you really want to delete this BillBoard?');">
+          {% csrf_token %}                     
+          <button type="submit" class="btn btn-danger glyphicon glyphicon-remove">
+              Delete
+          </button>
+      </form>        
+    </div>
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<br/>
+{% endblock content %} 
+
