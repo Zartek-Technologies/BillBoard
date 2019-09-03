@@ -15,4 +15,6 @@ class citySerializer(serializers.ModelSerializer):
 class contactSerializer(serializers.ModelSerializer):
      class Meta:
         model = contact_tble        
-        fields = ('__all__')
+        fields = ('boardId','Name','number')
+
+          #  fields = ('boardId',)
