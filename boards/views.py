@@ -43,9 +43,6 @@ def handler(request):
 
 
 def str_to_bool(string: str):
-    if type(string) is bool:
-        return string
-
     if string.lower() == 'true':
         return True
     elif string.lower() == 'false':
@@ -61,8 +58,8 @@ class filterboard(generics.ListAPIView):
         This view should return  list of all categories and its details
         """
         city = self.request.GET.get('city', True)
-        backlight = str_to_bool(self.request.GET.get('backlight', False))
-        available = str_to_bool(self.request.GET.get('available', False))
+        backlight = str_to_bool(self.request.GET.get('backlight', 'false'))
+        available = str_to_bool(self.request.GET.get('available', 'false'))
 
         print(city, type(backlight), backlight)
         queryset = BillBoard.objects \
